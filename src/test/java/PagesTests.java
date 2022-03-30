@@ -1,42 +1,29 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-public class PagesTests {
-
-    private WebDriver driver;
-
-    @BeforeAll
-    static void beforeAll() {
-
-        WebDriverManager.chromedriver().setup();
-    }
-
-    @BeforeEach
-    void setUp() {
-
-        driver = new ChromeDriver();
-    }
-
-    @AfterEach
-    void tearDown() {
-
-        driver.quit();
-    }
+public class PagesTests extends TestBase {
+    Logger logger = LoggerFactory.getLogger("PagesTests.class");
+    String siteUrl;
+    String actualTitle;
 
     @Tag("siiportal")
     @Tag("Regression")
     @ParameterizedTest
     @ValueSource(strings = {"Logowanie na koncie"})
     public void siiPortalTitle(String expectedTitle) {
-        driver.get("https://siiportal.sii.pl");
-        String actualTitle = driver.getTitle();
+        siteUrl = "https://siiportal.sii.pl";
+        driver.get(siteUrl);
+        actualTitle = driver.getTitle();
+        logger.info("<<<<<Provided site url is: " + siteUrl);
+        logger.info("<<<<<expected site title is: " + expectedTitle);
+        logger.info("<<<<<Actual site title is " + actualTitle);
         assertThat(actualTitle, equalTo(expectedTitle));
     }
 
@@ -45,8 +32,12 @@ public class PagesTests {
     @ParameterizedTest
     @ValueSource(strings = {"Kotuszkowo- blog o kotach"})
     public void kotuszkowoPageTitle(String expectedTitle) {
-        driver.get("http://kotuszkowo.pl");
+        siteUrl = "http://kotuszkowo.pl";
+        driver.get(siteUrl);
         String actualTitle = driver.getTitle();
+        logger.info("<<<<<Provided site url is: " + siteUrl);
+        logger.info("<<<<<expected site title is: " + expectedTitle);
+        logger.info("<<<<<Actual site title is " + actualTitle);
         assertThat(actualTitle, equalTo(expectedTitle));
     }
 
@@ -55,8 +46,12 @@ public class PagesTests {
     @ParameterizedTest
     @ValueSource(strings = {"Filmweb - filmy takie jak Ty!"})
     public void filmwebPageTitle(String expectedTitle) {
-        driver.get("https://www.filmweb.pl");
+        siteUrl = "https://www.filmweb.pl";
+        driver.get(siteUrl);
         String actualTitle = driver.getTitle();
+        logger.info("<<<<<Provided site url is: " + siteUrl);
+        logger.info("<<<<<expected site title is: " + expectedTitle);
+        logger.info("<<<<<Actual site title is " + actualTitle);
         assertThat(actualTitle, equalTo(expectedTitle));
     }
 
@@ -65,8 +60,12 @@ public class PagesTests {
     @ParameterizedTest
     @ValueSource(strings = {"WebDriver | Selenium"})
     public void seleniumPageTitle(String expectedTitle) {
-        driver.get("https://www.selenium.dev/documentation/en/webdriver");
+        siteUrl = "https://www.selenium.dev/documentation/en/webdriver";
+        driver.get(siteUrl);
         String actualTitle = driver.getTitle();
+        logger.info("<<<<<Provided site url is: " + siteUrl);
+        logger.info("<<<<<expected site title is: " + expectedTitle);
+        logger.info("<<<<<Actual site title is " + actualTitle);
         assertThat(actualTitle, equalTo(expectedTitle));
     }
 
@@ -75,8 +74,12 @@ public class PagesTests {
     @ParameterizedTest
     @ValueSource(strings = {"Onet – Jesteś na bieżąco"})
     public void onetPageTitle(String expectedTitle) {
-        driver.get("https://www.onet.pl");
+        siteUrl = "https://www.onet.pl";
+        driver.get(siteUrl);
         String actualTitle = driver.getTitle();
+        logger.info("<<<<<Provided site url is: " + siteUrl);
+        logger.info("<<<<<expected site title is: " + expectedTitle);
+        logger.info("<<<<<Actual site title is " + actualTitle);
         assertThat(actualTitle, equalTo(expectedTitle));
     }
 }
